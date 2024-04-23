@@ -1,4 +1,11 @@
+#!/usr/bin/python3
+"""
+0. Pascal's Triangle
+"""
+
+
 def pascal_triangle(n):
+    """ print pascal triangle """
     cache = [[1]]
     for i in range(1, n):
         tmp = [0] + cache[-1] + [0]
