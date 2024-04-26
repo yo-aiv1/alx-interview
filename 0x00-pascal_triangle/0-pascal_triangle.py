@@ -6,7 +6,7 @@
 
 def pascal_triangle(n):
     """ print pascal triangle """
-    if n <= 1:
+    if n <= 0:
         return []
 
     cache = [[1]]
