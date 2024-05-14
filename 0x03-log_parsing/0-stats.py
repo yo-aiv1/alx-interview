@@ -47,4 +47,7 @@ try:
                 FileSize += int(LineList[-1][:-1])
                 count += 1
 except KeyboardInterrupt:
+    pass
+finally:
     PrintResult()
+
