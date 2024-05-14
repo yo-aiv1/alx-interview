@@ -4,10 +4,25 @@ import sys
 import re
 
 
-pattern = r'^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}) - \[(.*?)\] "GET /projects/260 HTTP/1\.1" (\d{3}) (\d+)'
+IpCheck = r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
+DateCheck = r'\[(.*?)\]'
+ReqCheck = r'"GET /projects/260 HTTP/1\.1"'
+ScodeCheck = r'\d{3}'
+FileSizeCheck = r'\d+'
+
+pattern = f'^({IpCheck}) - ({DateCheck})
+            {ReqCheck} ({ScodeCheck}) ({FileSizeCheck})'
 count = 0
 FileSize = 0
-StatusCodes = {"200": 0, "301": 0, "400": 0, "401": 0, "403": 0, "404": 0, "405": 0, "500": 0}
+StatusCodes = {"200": 0,
+               "301": 0,
+               "400": 0,
+               "401": 0,
+               "403": 0,
+               "404": 0,
+               "405": 0,
+               "500": 0}
+
 for line in sys.stdin:
     match = re.match(pattern, line)
     if match:
