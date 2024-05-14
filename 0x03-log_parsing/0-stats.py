@@ -23,21 +23,28 @@ StatusCodes = {"200": 0,
                "405": 0,
                "500": 0}
 
-for line in sys.stdin:
-    match = re.match(pattern, line)
-    if match:
-        LineList = line.split(" ")
-        if LineList[-2] in StatusCodes.keys():
-            try:
+
+def PrintResult():
+    """
+    print result
+    """
+    print("File size: {}".format(FileSize))
+    for key, val in StatusCodes.items():
+        if val > 0:
+            print("{}: {}".format(int(key), val))
+
+
+try:
+    for line in sys.stdin:
+        match = re.match(pattern, line)
+        if match:
+            LineList = line.split(" ")
+            if LineList[-2] in StatusCodes.keys():
                 if count == 10:
                     count = 0
-                    raise KeyboardInterrupt
+                    PrintResult()
                 StatusCodes[LineList[-2]] = StatusCodes[LineList[-2]] + 1
                 FileSize += int(LineList[-1][:-1])
                 count += 1
-            except KeyboardInterrupt:
-                print("File size: {}".format(FileSize))
-                for key, val in StatusCodes.items():
-                    if val > 0:
-                        print("{}: {}".format(int(key), val))
-                continue
+except KeyboardInterrupt:
+    PrintResult()
