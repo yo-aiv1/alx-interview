@@ -1,17 +1,17 @@
 #!/usr/bin/python3
+""" parse log file """
 
 import sys
 import re
 
 
-IpCheck = r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
-DateCheck = r'\[(.*?)\]'
+IpC = r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}'
+DatCheck = r'\[(.*?)\]'
 ReqCheck = r'"GET /projects/260 HTTP/1\.1"'
 ScodeCheck = r'\d{3}'
-FileSizeCheck = r'\d+'
+FsizeCheck = r'\d+'
 
-pattern = f'^({IpCheck}) - ({DateCheck})
-            {ReqCheck} ({ScodeCheck}) ({FileSizeCheck})'
+pattern = f'^({IpC}) - ({DatCheck}) {ReqCheck} ({ScodeCheck}) ({FsizeCheck})'
 count = 0
 FileSize = 0
 StatusCodes = {"200": 0,
