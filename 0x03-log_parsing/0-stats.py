@@ -46,8 +46,7 @@ try:
                 StatusCodes[LineList[-2]] = StatusCodes[LineList[-2]] + 1
                 FileSize += int(LineList[-1][:-1])
                 count += 1
-except KeyboardInterrupt:
+except Exception:
     pass
 finally:
     PrintResult()
-
