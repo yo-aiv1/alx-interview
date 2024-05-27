@@ -2,7 +2,7 @@
 
 import sys
 
-def solve_nqueens(n, col, board, rows, diagonals, anti_diagonals, solutions):
+def BruteForce(n, col, board, rows, diagonals, anti_diagonals, solutions):
     if col == n:
         solutions.append([[i, board[i].index(1)] for i in range(n)])
         return
@@ -14,7 +14,7 @@ def solve_nqueens(n, col, board, rows, diagonals, anti_diagonals, solutions):
             diagonals[row - col] = True
             anti_diagonals[row + col] = True
 
-            solve_nqueens(n, col + 1, board, rows, diagonals, anti_diagonals, solutions)
+            BruteForce(n, col + 1, board, rows, diagonals, anti_diagonals, solutions)
 
             board[row][col] = 0
             rows[row] = False
@@ -42,7 +42,7 @@ def main():
     anti_diagonals = [False] * (2 * n - 1)
     solutions = []
 
-    solve_nqueens(n, 0, board, rows, diagonals, anti_diagonals, solutions)
+    BruteForce(n, 0, board, rows, diagonals, anti_diagonals, solutions)
 
     for solution in solutions:
         print(solution)
