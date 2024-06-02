@@ -2,24 +2,26 @@
 
 import sys
 
-def BruteForce(n, col, board, rows, diagonals, anti_diagonals, solutions):
+
+def BruteForce(n, col, board, rows, dia, anti_dia, solutions):
     if col == n:
         solutions.append([[i, board[i].index(1)] for i in range(n)])
         return
 
     for row in range(n):
-        if not rows[row] and not diagonals[row - col] and not anti_diagonals[row + col]:
+        if not rows[row] and not dia[row - col] and not anti_dia[row + col]:
             board[row][col] = 1
             rows[row] = True
-            diagonals[row - col] = True
-            anti_diagonals[row + col] = True
+            dia[row - col] = True
+            anti_dia[row + col] = True
 
-            BruteForce(n, col + 1, board, rows, diagonals, anti_diagonals, solutions)
+            BruteForce(n, col + 1, board, rows, dia, anti_dia, solutions)
 
             board[row][col] = 0
             rows[row] = False
-            diagonals[row - col] = False
-            anti_diagonals[row + col] = False
+            dia[row - col] = False
+            anti_dia[row + col] = False
+
 
 def main():
     if len(sys.argv) != 2:
@@ -38,14 +40,15 @@ def main():
 
     board = [[0 for _ in range(n)] for _ in range(n)]
     rows = [False] * n
-    diagonals = [False] * (2 * n - 1)
-    anti_diagonals = [False] * (2 * n - 1)
+    dia = [False] * (2 * n - 1)
+    anti_dia = [False] * (2 * n - 1)
     solutions = []
 
-    BruteForce(n, 0, board, rows, diagonals, anti_diagonals, solutions)
+    BruteForce(n, 0, board, rows, dia, anti_dia, solutions)
 
     for solution in solutions:
         print(solution)
+
 
 if __name__ == "__main__":
     main()
