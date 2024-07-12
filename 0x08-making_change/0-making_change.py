@@ -8,11 +8,16 @@ def makeChange(coins, total):
     """
     if total <= 0:
         return 0
-    dp = [float('inf')] * (total + 1)
-    dp[0] = 0
-
-    for coin in coins:
-        for i in range(coin, total + 1):
-            dp[i] = min(dp[i], dp[i - coin] + 1)
-
-    return dp[total] if dp[total] != float('inf') else -1
+    trace, count = 0, 0
+    coins.sort()
+    coins = coins[::-1]
+    while len(coins) > 0:
+        value = coins[0]
+        if trace + value > total:
+            coins.pop(0)
+            continue
+        trace += value
+        count += 1
+        if trace == total:
+            return count
+    return -1
